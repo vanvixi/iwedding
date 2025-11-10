@@ -1,0 +1,92 @@
+/* Custom Fonts for Wedding Invitation */
+
+/* Signora - decorative script font */
+@font-face {
+  font-family: 'Signora';
+  src: url('../fonts/signora.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Faugllin Balseyn - elegant serif */
+@font-face {
+  font-family: 'Faugllin Balseyn';
+  src: url('../fonts/faugllin-balseyn.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Madam Ghea - script font */
+@font-face {
+  font-family: 'Madam Ghea';
+  src: url('../fonts/madam-ghea.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Katty Diona - handwriting script (using Sacramento as base) */
+@font-face {
+  font-family: 'Katty Diona';
+  src: url('../fonts/sacramento.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Mallong - rounded sans-serif */
+@font-face {
+  font-family: 'Mallong';
+  src: url('../fonts/mallong.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Soul Note Display - elegant display font */
+@font-face {
+  font-family: 'Soul Note Display';
+  src: url('../fonts/soul-note-display.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* PlayfairDisplay - elegant serif for body text */
+@font-face {
+  font-family: 'PlayfairDisplay';
+  src: url('../fonts/playfairdisplay.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Quicksand - modern rounded sans-serif */
+@font-face {
+  font-family: 'Quicksand';
+  src: url('../fonts/quicksand.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Sacramento - elegant handwriting script */
+@font-face {
+  font-family: 'Sacramento';
+  src: url('../fonts/sacramento.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* Katty Diona - alternative handwriting script */
+@font-face {
+  font-family: 'Katty Diona';
+  src: url('../fonts/katty-diona.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

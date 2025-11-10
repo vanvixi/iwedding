@@ -1,0 +1,103 @@
+import 'package:jaspr/jaspr.dart';
+import '../components/audio_control.dart';
+import '../components/mobile_frame.dart';
+import '../components/wedding_sections/address_section.dart';
+import '../components/wedding_sections/calendar_section.dart';
+import '../components/wedding_sections/closing_section.dart';
+import '../components/wedding_sections/header_section.dart';
+import '../components/wedding_sections/love_story_section.dart';
+import '../components/wedding_sections/story_intro_section.dart';
+import '../components/blessing_list.dart';
+import '../components/blessing_popup_container.dart';
+import '../components/gift_popup_container.dart';
+import '../components/toolbar.dart';
+import '../components/toolbar_toggle_button.dart';
+
+@client
+class WeddingPage extends StatelessComponent {
+  const WeddingPage({super.key});
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      classes: 'wedding-page',
+      styles: Styles(
+        width: Unit.vw(100),
+        height: Unit.vh(100),
+        padding: Padding.only(top: Unit.vh(5)),
+        backgroundColor: Color('#f0f2f5'),
+      ),
+      [
+        MobileFrame(
+          children: [
+            AudioControl(),
+            _PageContainer(),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class _PageContainer extends StatelessComponent {
+  const _PageContainer();
+
+  @override
+  Component build(BuildContext context) {
+    return div(
+      id: 'wedding-page-container',
+      [
+        div(
+          classes: 'relative custom-scroll h-full touch-action:auto',
+          styles: Styles(
+            display: Display.flex,
+            overflow: Overflow.only(x: Overflow.hidden),
+            justifyContent: JustifyContent.center,
+            backgroundColor: Color('#fff'),
+          ),
+          [
+            div(
+              id: 'wd-page-container-wrapper',
+              styles: Styles(
+                display: Display.flex,
+                width: Unit.pixels(385),
+                minWidth: Unit.pixels(385),
+                maxWidth: Unit.pixels(500),
+                padding: Padding.only(bottom: Unit.pixels(80)),
+                margin: Margin.all(Unit.auto),
+                flexDirection: FlexDirection.column,
+                gap: Gap.all(Unit.pixels(32)),
+                backgroundColor: Color('#fff'),
+              ),
+              [
+                // Header section
+                HeaderSection(),
+
+                // Story introduction section
+                StoryIntroSection(),
+
+                // Timeline with love story photos and quotes
+                LoveStorySection(),
+
+                // Time and calendar section
+                CalendarSection(),
+
+                // Address and venue info section
+                AddressSection(),
+
+                // Closing section with thank you message
+                ClosingSection(),
+              ],
+            ),
+          ],
+        ),
+
+        ToolbarToggleButton(),
+        BlessingList(),
+        Toolbar(),
+        BlessingPopupContainer(),
+        GiftPopupContainer(),
+      ],
+    );
+  }
+}
