@@ -12,6 +12,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Tailwind CSS CLI
+        run: npm install -g tailwindcss
+
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
@@ -41,15 +49,28 @@ jobs:
       - name: Install Jaspr CLI
         run: dart pub global activate jaspr_cli
 
+      - name: Clean build cache
+        run: dart run build_runner clean
+
       - name: Build project
-        run: jaspr build
+        run: |
+          jaspr build --verbose
+          BUILD_EXIT_CODE=$?
+          if [ $BUILD_EXIT_CODE -ne 0 ]; then
+            echo "Build failed with exit code $BUILD_EXIT_CODE"
+            exit 1
+          fi
 
       - name: Verify build output
         run: |
           echo "Checking build directory..."
           ls -la build/jaspr/
           echo "Checking for index.html..."
-          test -f build/jaspr/index.html && echo "index.html exists" || echo "index.html NOT found"
+          if [ ! -f build/jaspr/index.html ]; then
+            echo "ERROR: index.html NOT found!"
+            exit 1
+          fi
+          echo "index.html exists - build successful!"
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
