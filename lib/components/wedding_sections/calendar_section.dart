@@ -18,7 +18,7 @@ class CalendarSection extends StatelessComponent {
     );
 
     return FlexSection(
-      gap: 16,
+      gap: 8,
       paddingHorizontal: 16,
       children: [
         Spacer(height: 4),
@@ -38,8 +38,8 @@ class CalendarSection extends StatelessComponent {
             br(),
             text('Âm Lịch: 27/9/2025'),
           ]),
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
           fontFamily: AppFonts.mallong,
           align: TextAlign.center,
         ),

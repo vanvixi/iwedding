@@ -23,7 +23,7 @@ class WeddingPage extends StatelessComponent {
       classes: 'wedding-page',
       styles: Styles(
         width: Unit.vw(100),
-        height: Unit.vh(100),
+        minHeight: Unit.vh(100),
         padding: Padding.only(top: Unit.vh(5)),
         backgroundColor: Color('#f0f2f5'),
       ),
@@ -46,12 +46,16 @@ class _PageContainer extends StatelessComponent {
   Component build(BuildContext context) {
     return div(
       id: 'wedding-page-container',
+      styles: Styles(
+        overflow: Overflow.hidden,
+      ),
       [
         div(
-          classes: 'relative custom-scroll h-full touch-action:auto',
+          classes: 'relative custom-scroll touch-action:auto',
           styles: Styles(
             display: Display.flex,
-            overflow: Overflow.only(x: Overflow.hidden),
+            height: Unit.percent(100),
+            overflow: Overflow.only(x: Overflow.hidden, y: Overflow.auto),
             justifyContent: JustifyContent.center,
             backgroundColor: Color('#fff'),
           ),
@@ -61,7 +65,6 @@ class _PageContainer extends StatelessComponent {
               styles: Styles(
                 display: Display.flex,
                 width: Unit.pixels(385),
-                minWidth: Unit.pixels(385),
                 maxWidth: Unit.pixels(500),
                 padding: Padding.only(bottom: Unit.pixels(80)),
                 margin: Margin.all(Unit.auto),

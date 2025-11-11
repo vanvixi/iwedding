@@ -142,6 +142,21 @@ Edit the section files in `lib/components/wedding_sections/` to customize:
 - **Global CSS**: Edit `web/css/styles.css`
 - **Component Styles**: Most components use inline Jaspr `Styles()` for better encapsulation
 - **Animations**: Scroll animations defined in `styles.css` (`.scroll-animated`)
+- **Tailwind CSS**: Optional utility-first CSS framework (see [jaspr_tailwind](https://pub.dev/packages/jaspr_tailwind) for setup)
+
+#### Tailwind CSS Build
+
+After setting up Tailwind CSS following the [jaspr_tailwind guide](https://pub.dev/packages/jaspr_tailwind):
+
+**Manual build:**
+```bash
+tailwindcss -i web/css/styles.tw.css -o web/css/styles.css --minify
+```
+
+**Watch mode (auto-rebuild on changes):**
+```bash
+tailwindcss -i web/css/styles.tw.css -o web/css/styles.css --minify --watch
+```
 
 ### Firebase Setup
 

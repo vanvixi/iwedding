@@ -24,8 +24,8 @@ class AddressSection extends StatelessComponent {
         // Hotel Name
         FlexText(
           content: text('Tư Gia Nhà Trai'),
-          fontSize: 13,
-          fontWeight: FontWeight.w500,
+          fontSize: 15,
+          fontWeight: FontWeight.bold,
           fontFamily: AppFonts.mallong,
           align: TextAlign.center,
         ),
