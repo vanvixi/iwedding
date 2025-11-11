@@ -12,6 +12,8 @@ import '../components/blessing_popup_container.dart';
 import '../components/gift_popup_container.dart';
 import '../components/toolbar.dart';
 import '../components/toolbar_toggle_button.dart';
+import '../helper/auto_scroll_helper.dart';
+import '../helper/scroll_observer_helper.dart';
 
 @client
 class WeddingPage extends StatelessComponent {
@@ -31,6 +33,7 @@ class WeddingPage extends StatelessComponent {
         MobileFrame(
           children: [
             AudioControl(),
+            // ScrollObserver(),
             _PageContainer(),
           ],
         ),
@@ -39,8 +42,32 @@ class WeddingPage extends StatelessComponent {
   }
 }
 
-class _PageContainer extends StatelessComponent {
+class _PageContainer extends StatefulComponent {
   const _PageContainer();
+
+  @override
+  State createState() => _PageContainerState();
+}
+
+class _PageContainerState extends State<_PageContainer> {
+  late final AutoScrollHelper _autoScrollHelper;
+  late final ScrollObserverHelper _scrollObserverHelper;
+
+  @override
+  void initState() {
+    super.initState();
+    _autoScrollHelper = AutoScrollHelper();
+    _scrollObserverHelper = ScrollObserverHelper();
+    _autoScrollHelper.initialize();
+    _scrollObserverHelper.initialize();
+  }
+
+  @override
+  void dispose() {
+    _autoScrollHelper.dispose();
+    _scrollObserverHelper.dispose();
+    super.dispose();
+  }
 
   @override
   Component build(BuildContext context) {

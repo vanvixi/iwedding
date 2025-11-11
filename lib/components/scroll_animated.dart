@@ -1,5 +1,4 @@
 import 'package:jaspr/jaspr.dart';
-import 'package:web/web.dart' as web;
 
 /// Animation direction for scroll animations
 enum AnimationDirection {
@@ -11,9 +10,10 @@ enum AnimationDirection {
 
 /// Wrapper component that animates children when scrolled into view
 ///
-/// Uses internal state to show content immediately on mount, then relies on
-/// JavaScript Intersection Observer for subsequent scroll animations
-class ScrollAnimated extends StatefulComponent {
+/// Relies on ScrollObserverHelper (initialized in WeddingPage) to add 'is-visible'
+/// class when element enters viewport. Component only renders markup with proper
+/// classes and attributes.
+class ScrollAnimated extends StatelessComponent {
   const ScrollAnimated({
     super.key,
     required this.child,
@@ -28,49 +28,9 @@ class ScrollAnimated extends StatefulComponent {
   final AnimationDirection direction;
 
   @override
-  State<ScrollAnimated> createState() => _ScrollAnimatedState();
-}
-
-class _ScrollAnimatedState extends State<ScrollAnimated> {
-  bool _isVisible = false;
-  String? _elementId;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Generate unique ID for this instance
-    _elementId = 'scroll-animated-${DateTime.now().microsecondsSinceEpoch}-$hashCode';
-
-    // Show content immediately if requested (for above-the-fold content)
-    if (component.showImmediately) {
-      // Use Future.microtask to trigger animation after first render
-      Future.microtask(() {
-        if (mounted) {
-          setState(() {
-            _isVisible = true;
-          });
-        }
-      });
-    } else {
-      // Check if element already has is-visible class (from previous render)
-      Future.microtask(() {
-        if (!mounted) return;
-        final element = web.document.getElementById(_elementId!);
-        if (element != null && element.classList.contains('is-visible')) {
-          // Preserve visible state
-          setState(() {
-            _isVisible = true;
-          });
-        }
-      });
-    }
-  }
-
-  @override
   Component build(BuildContext context) {
     // Map direction to CSS class
-    final directionClass = switch (component.direction) {
+    final directionClass = switch (direction) {
       AnimationDirection.up => 'slide-up',
       AnimationDirection.down => 'slide-down',
       AnimationDirection.left => 'slide-left',
@@ -78,19 +38,21 @@ class _ScrollAnimatedState extends State<ScrollAnimated> {
     };
 
     // Build CSS classes
+    // If showImmediately is true, add 'is-visible' class directly
+    // Otherwise, ScrollObserverHelper will add it when element enters viewport
     final classes = [
       'scroll-animated',
       directionClass,
-      if (_isVisible) 'is-visible',
+      if (showImmediately) 'is-visible',
     ].join(' ');
 
     return div(
-      id: _elementId,
       classes: classes,
       attributes: {
-        'data-threshold': component.threshold.toString(),
+        // Add threshold attribute for ScrollObserverHelper to use
+        if (!showImmediately) 'data-threshold': threshold.toString(),
       },
-      [component.child],
+      [child],
     );
   }
 }
