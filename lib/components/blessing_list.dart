@@ -95,6 +95,8 @@ class _BlessingListState extends State<BlessingList> {
     final oneSetHeight = scrollHeight / 3.0;
     // Put initial scrollTop at middle set, preserving remainder if any.
     container.scrollTop = oneSetHeight;
+    // Force iOS to acknowledge the initial scroll position
+    final _ = container.scrollTop;
     _isInitialScrollSet = true;
   }
 
@@ -157,15 +159,23 @@ class _BlessingListState extends State<BlessingList> {
     }
 
     final dy = _kSpeedPixelsPerSecond * (deltaMsInt / 1000.0);
-    container.scrollTop = container.scrollTop + dy;
+    final newScrollTop = container.scrollTop + dy;
+    container.scrollTop = newScrollTop;
+
+    // Force iOS to acknowledge the scroll change
+    final _ = container.scrollTop;
 
     final scrollHeight = container.scrollHeight;
     final oneSetHeight = scrollHeight / 3.0;
 
     if (container.scrollTop >= oneSetHeight * 2.0) {
-      container.scrollTop = container.scrollTop - oneSetHeight;
+      final resetScrollTop = container.scrollTop - oneSetHeight;
+      container.scrollTop = resetScrollTop;
+      final _ = container.scrollTop; // Force reflow
     } else if (container.scrollTop <= 0.0) {
-      container.scrollTop = container.scrollTop + oneSetHeight;
+      final resetScrollTop = container.scrollTop + oneSetHeight;
+      container.scrollTop = resetScrollTop;
+      final _ = container.scrollTop; // Force reflow
     }
   }
 
@@ -190,16 +200,24 @@ class _BlessingListState extends State<BlessingList> {
     }
 
     final dy = _kSpeedPixelsPerSecond * (deltaMs / 1000.0);
-    container.scrollTop = container.scrollTop + dy;
+    final newScrollTop = container.scrollTop + dy;
+    container.scrollTop = newScrollTop;
+
+    // Force iOS to acknowledge the scroll change
+    final _ = container.scrollTop;
 
     final scrollHeight = container.scrollHeight;
     final oneSetHeight = scrollHeight / 3.0;
 
     if (container.scrollTop >= oneSetHeight * 2.0) {
       // preserve remainder by subtracting exactly oneSetHeight
-      container.scrollTop = container.scrollTop - oneSetHeight;
+      final resetScrollTop = container.scrollTop - oneSetHeight;
+      container.scrollTop = resetScrollTop;
+      final _ = container.scrollTop; // Force reflow
     } else if (container.scrollTop <= 0.0) {
-      container.scrollTop = container.scrollTop + oneSetHeight;
+      final resetScrollTop = container.scrollTop + oneSetHeight;
+      container.scrollTop = resetScrollTop;
+      final _ = container.scrollTop; // Force reflow
     }
 
     // schedule next
@@ -237,6 +255,7 @@ class _BlessingListState extends State<BlessingList> {
         raw: {
           'scrollbar-width': 'none',
           '-ms-overflow-style': 'none',
+          'overscroll-behavior': 'contain',
         },
       ),
       [
