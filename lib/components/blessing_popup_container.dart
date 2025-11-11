@@ -110,6 +110,8 @@ class _BlessingFormState extends State<BlessingForm> {
   bool _isSubmitting = false;
   bool _isSubmittedSuccessfully = false;
   String _errorMessage = '';
+  web.EventListener? _nameInputFocusListener;
+  web.EventListener? _messageInputFocusListener;
 
   web.HTMLInputElement? get _nameInput {
     return web.document.querySelector('.bar-m-name') as web.HTMLInputElement?;
@@ -117,6 +119,62 @@ class _BlessingFormState extends State<BlessingForm> {
 
   web.HTMLTextAreaElement? get _messageInput {
     return web.document.querySelector('.bar-m-mess') as web.HTMLTextAreaElement?;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _setupFocusListeners();
+  }
+
+  @override
+  void dispose() {
+    _removeFocusListeners();
+    super.dispose();
+  }
+
+  void _setupFocusListeners() {
+    // Use microtask to ensure DOM is ready
+    Future.microtask(() {
+      _nameInputFocusListener = ((web.Event event) {
+        _scrollInputIntoView(event.target as web.HTMLElement?);
+      }).toJS;
+
+      _messageInputFocusListener = ((web.Event event) {
+        _scrollInputIntoView(event.target as web.HTMLElement?);
+      }).toJS;
+
+      _nameInput?.addEventListener('focus', _nameInputFocusListener);
+      _messageInput?.addEventListener('focus', _messageInputFocusListener);
+    });
+  }
+
+  void _removeFocusListeners() {
+    if (_nameInputFocusListener != null) {
+      _nameInput?.removeEventListener('focus', _nameInputFocusListener);
+    }
+    if (_messageInputFocusListener != null) {
+      _messageInput?.removeEventListener('focus', _messageInputFocusListener);
+    }
+  }
+
+  void _scrollInputIntoView(web.HTMLElement? element) {
+    if (element == null) return;
+
+    // Delay to let keyboard appear first
+    Future.delayed(Duration(milliseconds: 300), () {
+      try {
+        // Try using scrollIntoView with options
+        final options = {
+          'behavior': 'smooth',
+          'block': 'center',
+        }.jsify() as JSAny;
+        element.scrollIntoView(options);
+      } catch (e) {
+        // Fallback to simple scrollIntoView
+        element.scrollIntoView();
+      }
+    });
   }
 
   Future<void> _handleSubmit() async {
