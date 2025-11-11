@@ -12,6 +12,7 @@ import '../components/blessing_popup_container.dart';
 import '../components/gift_popup_container.dart';
 import '../components/toolbar.dart';
 import '../components/toolbar_toggle_button.dart';
+import '../helper/auto_scroll_helper.dart';
 
 @client
 class WeddingPage extends StatelessComponent {
@@ -39,8 +40,28 @@ class WeddingPage extends StatelessComponent {
   }
 }
 
-class _PageContainer extends StatelessComponent {
+class _PageContainer extends StatefulComponent {
   const _PageContainer();
+
+  @override
+  State createState() => _PageContainerState();
+}
+
+class _PageContainerState extends State<_PageContainer> {
+  late final AutoScrollHelper _helper;
+
+  @override
+  void initState() {
+    super.initState();
+    _helper = AutoScrollHelper();
+    _helper.initialize();
+  }
+
+  @override
+  void dispose() {
+    _helper.dispose();
+    super.dispose();
+  }
 
   @override
   Component build(BuildContext context) {
