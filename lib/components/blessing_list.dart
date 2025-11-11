@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:js_interop';
 import 'package:jaspr/jaspr.dart';
 import 'package:web/web.dart' as web;
 import 'package:wedding/models/blessing.dart';
@@ -45,13 +46,10 @@ class _BlessingListState extends State<BlessingList> {
     _blessingsSubscription = _blessingService.getBlessingsStream(limit: component.limit).listen((blessings) {
       setState(() {
         _blessings = blessings;
-        // reset initial state when list changes
         _isInitialScrollSet = false;
       });
 
-      // Small delay to let Jaspr render DOM nodes
       Future.delayed(const Duration(milliseconds: 50), () async {
-        // Try to set initial pos; if success and content is scrollable, start anim
         final ready = await _waitForContainerReady(timeoutMs: 2000);
         if (!ready) {
           return;
@@ -88,14 +86,11 @@ class _BlessingListState extends State<BlessingList> {
     final clientHeight = container.clientHeight;
 
     if (scrollHeight <= clientHeight) {
-      // nothing to scroll
       return;
     }
 
     final oneSetHeight = scrollHeight / 3.0;
-    // Put initial scrollTop at middle set, preserving remainder if any.
     container.scrollTop = oneSetHeight;
-    // Force iOS to acknowledge the initial scroll position
     final _ = container.scrollTop;
     _isInitialScrollSet = true;
   }
@@ -104,33 +99,28 @@ class _BlessingListState extends State<BlessingList> {
     if (_animating) return;
     final container = web.document.getElementById(_containerId);
     if (container == null) {
-      // shouldn't happen because we waited, but be safe
       return;
     }
 
     final scrollHeight = container.scrollHeight;
     final clientHeight = container.clientHeight;
     if (scrollHeight <= clientHeight) {
-      // nothing to scroll
       return;
     }
 
     _animating = true;
     _lastTimestamp = null;
-    // Start RAF loop; cast when passing callback to avoid assignment/cast issues elsewhere.
+
     try {
       // ignore: invalid_runtime_check_with_js_interop_types
       web.window.requestAnimationFrame(_animationFrame as web.FrameRequestCallback);
-      // Setup a fallback: if RAF doesn't run within 300ms, use Timer fallback
       Future.delayed(Duration(milliseconds: 300), () {
         if (!_animating) return;
-        // If lastTimestamp still null after RAF scheduled, fallback
         if (_lastTimestamp == null) {
           _startFallbackTimer();
         }
       });
     } catch (e) {
-      // if requestAnimationFrame call itself throws, start fallback
       _startFallbackTimer();
     }
   }
@@ -143,7 +133,6 @@ class _BlessingListState extends State<BlessingList> {
   }
 
   void _startFallbackTimer() {
-    // if RAF is not available or not invoking, use a Timer with 60fps-ish period
     _fallbackTimer?.cancel();
     _fallbackTimer = Timer.periodic(const Duration(milliseconds: 16), (_) {
       if (!_animating) return;
@@ -159,23 +148,19 @@ class _BlessingListState extends State<BlessingList> {
     }
 
     final dy = _kSpeedPixelsPerSecond * (deltaMsInt / 1000.0);
-    final newScrollTop = container.scrollTop + dy;
-    container.scrollTop = newScrollTop;
 
-    // Force iOS to acknowledge the scroll change
-    final _ = container.scrollTop;
+    // Use scrollBy instead of setting scrollTop directly (better iOS support)
+    final options = {'left': 0, 'top': dy, 'behavior': 'auto'}.jsify() as JSAny;
+    container.scrollBy(options);
 
     final scrollHeight = container.scrollHeight;
     final oneSetHeight = scrollHeight / 3.0;
 
+    // Check position and reset for infinity loop
     if (container.scrollTop >= oneSetHeight * 2.0) {
-      final resetScrollTop = container.scrollTop - oneSetHeight;
-      container.scrollTop = resetScrollTop;
-      final _ = container.scrollTop; // Force reflow
+      container.scrollTop = container.scrollTop - oneSetHeight;
     } else if (container.scrollTop <= 0.0) {
-      final resetScrollTop = container.scrollTop + oneSetHeight;
-      container.scrollTop = resetScrollTop;
-      final _ = container.scrollTop; // Force reflow
+      container.scrollTop = container.scrollTop + oneSetHeight;
     }
   }
 
@@ -200,24 +185,20 @@ class _BlessingListState extends State<BlessingList> {
     }
 
     final dy = _kSpeedPixelsPerSecond * (deltaMs / 1000.0);
-    final newScrollTop = container.scrollTop + dy;
-    container.scrollTop = newScrollTop;
 
-    // Force iOS to acknowledge the scroll change
-    final _ = container.scrollTop;
+    // Use scrollBy instead of setting scrollTop directly (better iOS support)
+    final options = {'left': 0, 'top': dy, 'behavior': 'auto'}.jsify() as JSAny;
+    container.scrollBy(options);
 
     final scrollHeight = container.scrollHeight;
     final oneSetHeight = scrollHeight / 3.0;
 
+    // Check position and reset for infinity loop
     if (container.scrollTop >= oneSetHeight * 2.0) {
       // preserve remainder by subtracting exactly oneSetHeight
-      final resetScrollTop = container.scrollTop - oneSetHeight;
-      container.scrollTop = resetScrollTop;
-      final _ = container.scrollTop; // Force reflow
+      container.scrollTop = container.scrollTop - oneSetHeight;
     } else if (container.scrollTop <= 0.0) {
-      final resetScrollTop = container.scrollTop + oneSetHeight;
-      container.scrollTop = resetScrollTop;
-      final _ = container.scrollTop; // Force reflow
+      container.scrollTop = container.scrollTop + oneSetHeight;
     }
 
     // schedule next
