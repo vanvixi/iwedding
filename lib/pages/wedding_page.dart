@@ -50,21 +50,21 @@ class _PageContainer extends StatefulComponent {
 }
 
 class _PageContainerState extends State<_PageContainer> {
-  late final AutoScrollHelper _helper;
+  late final AutoScrollHelper _autoScrollHelper;
   late final ScrollObserverHelper _scrollObserverHelper;
 
   @override
   void initState() {
     super.initState();
-    _helper = AutoScrollHelper();
+    _autoScrollHelper = AutoScrollHelper();
     _scrollObserverHelper = ScrollObserverHelper();
-    _helper.initialize();
+    _autoScrollHelper.initialize();
     _scrollObserverHelper.initialize();
   }
 
   @override
   void dispose() {
-    _helper.dispose();
+    _autoScrollHelper.dispose();
     _scrollObserverHelper.dispose();
     super.dispose();
   }
