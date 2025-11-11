@@ -46,7 +46,7 @@ class LoveStorySection extends StatelessComponent {
                 div([text('mang theo ánh sao đến bên mình. ')]),
                 div([text('Cũng từng tự hỏi tình yêu là gì, ')]),
                 div([text('nhưng chẳng thể diễn tả rõ ràng. ')]),
-                div([text('Cho đến ngày gặp anh/em, em chợt nghĩ, ')]),
+                div([text('Cho đến ngày gặp anh, em chợt nghĩ, ')]),
                 div([text('có lẽ tình yêu là những buổi chiều bên nhau, ')]),
                 div([text('ngồi trên ghế đá công viên, ')]),
                 div([text('trò chuyện mãi không dứt. ')]),

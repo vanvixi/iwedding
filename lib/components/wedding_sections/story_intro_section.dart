@@ -177,8 +177,6 @@ class StoryIntroSection extends StatelessComponent {
                         br(),
                         text('chúng mình gặp nhau vào mùa hè,'),
                         br(),
-                        text('chúng mình gặp nhau vào mùa hè,'),
-                        br(),
                         text('hẹn ước vào mùa xuân,'),
                         br(),
                         text('và hôm nay, trong khoảnh khắc đẹp nhất,'),
