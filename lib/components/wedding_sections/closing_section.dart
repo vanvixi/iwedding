@@ -15,6 +15,7 @@ class ClosingSection extends StatelessComponent {
       gap: 16,
       paddingHorizontal: 16,
       children: [
+        Spacer(height: 4),
         // Heart icon decoration
         ScrollAnimated(
           child: div(

@@ -268,9 +268,18 @@
 
 #wedding-page-container {
 	overflow-x: hidden !important;
+	height: 100%;
 }
 
 #wd-page-container-wrapper {
+	overflow-x: hidden !important;
+}
+
+.wedding-page {
+	overflow-x: hidden !important;
+}
+
+.mobile-frame {
 	overflow-x: hidden !important;
 }
 
