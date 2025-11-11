@@ -48,8 +48,10 @@ jobs:
       - name: Install Jaspr CLI
         run: dart pub global activate jaspr_cli
 
-      - name: Build Tailwind CSS
-        run: npx -y tailwindcss@latest -i web/css/styles.tw.css -o web/css/styles.css --minify
+      - name: Install and Build Tailwind CSS
+        run: |
+          npm install -D tailwindcss@latest
+          npx tailwindcss -i web/css/styles.tw.css -o web/css/styles.css --minify
 
       - name: Clean build cache
         run: dart run build_runner clean
