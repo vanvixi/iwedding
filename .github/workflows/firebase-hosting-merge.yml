@@ -17,9 +17,6 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install Tailwind CSS CLI
-        run: npm install -g tailwindcss@latest
-
       - name: Setup Flutter SDK
         uses: subosito/flutter-action@v2
         with:
@@ -50,7 +47,7 @@ jobs:
         run: dart pub global activate jaspr_cli
 
       - name: Build Tailwind CSS
-        run: tailwindcss -i web/css/styles.tw.css -o web/css/styles.css --minify
+        run: npx -y tailwindcss@latest -i web/css/styles.tw.css -o web/css/styles.css --minify
 
       - name: Clean build cache
         run: dart run build_runner clean
