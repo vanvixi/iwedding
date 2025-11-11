@@ -229,11 +229,11 @@ class _BlessingListState extends State<BlessingList> {
         width: Unit.percent(70),
         height: Unit.pixels(140),
         overflow: Overflow.auto,
-        pointerEvents: PointerEvents.none,
         raw: {
           'scrollbar-width': 'none',
           '-ms-overflow-style': 'none',
           'overscroll-behavior': 'contain',
+          '-webkit-overflow-scrolling': 'touch',
         },
       ),
       [
