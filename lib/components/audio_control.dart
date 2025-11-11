@@ -1,8 +1,30 @@
 import 'package:jaspr/jaspr.dart';
+import '../helper/audio_control_helper.dart';
 
 /// Audio control button component
-class AudioControl extends StatelessComponent {
+@client
+class AudioControl extends StatefulComponent {
   const AudioControl({super.key});
+
+  @override
+  State<AudioControl> createState() => _AudioControlState();
+}
+
+class _AudioControlState extends State<AudioControl> {
+  late final AudioControlHelper _helper;
+
+  @override
+  void initState() {
+    super.initState();
+    _helper = AudioControlHelper();
+    _helper.initialize();
+  }
+
+  @override
+  void dispose() {
+    _helper.dispose();
+    super.dispose();
+  }
 
   @override
   Component build(BuildContext context) {
