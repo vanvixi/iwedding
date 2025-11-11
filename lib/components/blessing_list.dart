@@ -95,7 +95,7 @@ class _BlessingListState extends State<BlessingList> {
         ),
         zIndex: ZIndex(1001),
         width: Unit.percent(70),
-        height: Unit.pixels(140),
+        height: Unit.pixels(150),
         overflow: Overflow.auto,
         raw: {
           'scrollbar-width': 'none',
