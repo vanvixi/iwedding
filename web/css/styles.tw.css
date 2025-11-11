@@ -330,7 +330,7 @@
 	-ms-flex-pack: center;
 	justify-content: center;
 	cursor: pointer;
-	z-index: 999;
+	z-index: 9999998;
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
@@ -481,8 +481,9 @@
 
   /* Adjust audio control position for mobile */
   #audio-control-wrapper {
-    right: 12px;
-    top: 12px;
+    position: fixed !important;
+    right: 12px !important;
+    top: 12px !important;
   }
 
   /* Make toolbar full width on mobile and stick to bottom */
@@ -506,6 +507,17 @@
     transform: none !important;
     width: calc(100vw - 32px) !important;
     max-width: calc(100vw - 32px) !important;
+  }
+
+  /* Adjust toolbar toggle button position for mobile */
+  .toolbar-toggle-button {
+    position: fixed !important;
+    right: 8px !important;
+    bottom: 70px !important;
+  }
+
+  #wedding-page-container.hide-toolbar .toolbar-toggle-button {
+    bottom: 20px !important;
   }
 }
 
