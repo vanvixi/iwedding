@@ -7,9 +7,7 @@ import 'package:wedding/services/blessing_service.dart';
 
 @client
 class BlessingList extends StatefulComponent {
-  const BlessingList({super.key, this.limit = 10});
-
-  final int limit;
+  const BlessingList({super.key});
 
   @override
   State<BlessingList> createState() => _BlessingListState();
@@ -43,7 +41,7 @@ class _BlessingListState extends State<BlessingList> {
   }
 
   void _startListeningToBlessings() {
-    _blessingsSubscription = _blessingService.getBlessingsStream(limit: component.limit).listen((blessings) {
+    _blessingsSubscription = _blessingService.getBlessingsStream().listen((blessings) {
       setState(() {
         _blessings = blessings;
         _isInitialScrollSet = false;
@@ -223,16 +221,15 @@ class _BlessingListState extends State<BlessingList> {
       id: _containerId,
       classes: 'blessing-list-container',
       styles: Styles(
-        position: Position.fixed(
-          left: Unit.percent(50),
-          bottom: Unit.expression('calc(5vh + 56px)'),
+        position: Position.absolute(
+          left: Unit.pixels(12),
+          bottom: Unit.expression('calc(5vh + 12px)'),
         ),
         zIndex: ZIndex(1001),
-        width: Unit.pixels(285),
-        height: Unit.pixels(180),
+        width: Unit.percent(70),
+        height: Unit.pixels(140),
         overflow: Overflow.auto,
         pointerEvents: PointerEvents.none,
-        transform: Transform.translate(x: Unit.pixels(-192.5 + 12)),
         raw: {
           'scrollbar-width': 'none',
           '-ms-overflow-style': 'none',
@@ -243,24 +240,21 @@ class _BlessingListState extends State<BlessingList> {
         for (var blessing in duplicatedBlessings)
           div(
             styles: Styles(
-              display: Display.flex,
+              display: Display.block,
               position: Position.relative(),
               width: Unit.fitContent,
               minHeight: Unit.pixels(28),
               maxWidth: Unit.percent(100),
-              padding: Padding.symmetric(horizontal: Unit.pixels(10), vertical: Unit.pixels(2)),
+              padding: Padding.symmetric(horizontal: Unit.pixels(10), vertical: Unit.pixels(6)),
               margin: Margin.symmetric(vertical: Unit.pixels(3)),
               border: Border.none,
               radius: BorderRadius.circular(Unit.pixels(7)),
               userSelect: UserSelect.none,
               transition: Transition('opacity', duration: 0.5, curve: Curve.easeInOut),
-              justifyContent: JustifyContent.start,
-              alignItems: AlignItems.center,
               color: Color.rgba(255, 255, 255, 1),
               textAlign: TextAlign.left,
               fontSize: Unit.pixels(12),
-              lineHeight: Unit.pixels(14),
-              whiteSpace: WhiteSpace.noWrap,
+              lineHeight: Unit.pixels(16),
               backgroundColor: Color.rgba(225, 117, 117, 0.5),
               raw: {'-webkit-tap-highlight-color': 'transparent'},
             ),

@@ -514,11 +514,10 @@
 
   /* Adjust blessing list position for mobile */
   .blessing-list-container {
-    left: 16px !important;
-    bottom: 56px !important;
-    transform: none !important;
-    width: calc(100vw - 32px) !important;
-    max-width: calc(100vw - 32px) !important;
+    position: fixed !important;
+    left: 12px !important;
+    bottom: 52px !important;
+    width: 70vw !important;
   }
 
   /* Adjust toolbar toggle button position for mobile */
