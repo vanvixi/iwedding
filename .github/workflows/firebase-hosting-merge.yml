@@ -44,6 +44,13 @@ jobs:
       - name: Build project
         run: jaspr build
 
+      - name: Verify build output
+        run: |
+          echo "Checking build directory..."
+          ls -la build/jaspr/
+          echo "Checking for index.html..."
+          test -f build/jaspr/index.html && echo "index.html exists" || echo "index.html NOT found"
+
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -51,3 +58,4 @@ jobs:
           channelId: live
           projectId: iwedding-vuongs2trang
           entryPoint: .
+          target: iwedding-vuongs2trang
