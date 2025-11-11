@@ -28,9 +28,7 @@ class BlessingService {
           .limit(limit)
           .get();
 
-      return snapshot.docs
-          .map((doc) => Blessing.fromFirestore(doc))
-          .toList();
+      return snapshot.docs.map((doc) => Blessing.fromFirestore(doc)).toList();
     } catch (e) {
       print('Error loading blessings: $e');
       return [];
@@ -38,15 +36,12 @@ class BlessingService {
   }
 
   /// Stream để lắng nghe real-time updates của các lời chúc
-  Stream<List<Blessing>> getBlessingsStream({int limit = 20}) {
+  Stream<List<Blessing>> getBlessingsStream() {
     return _firestore
         .collection(_collection)
         .orderBy('timestamp', descending: true)
-        .limit(limit)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => Blessing.fromFirestore(doc))
-            .toList());
+        .map((snapshot) => snapshot.docs.map((doc) => Blessing.fromFirestore(doc)).toList());
   }
 
   /// Xóa một lời chúc (cho admin)
