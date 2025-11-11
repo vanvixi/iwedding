@@ -16,9 +16,27 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
+
+      - name: Cache pub dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-
 
       - name: Install dependencies
         run: flutter pub get
+
+      - name: Cache Jaspr CLI
+        uses: actions/cache@v3
+        with:
+          path: ~/.pub-cache/bin
+          key: ${{ runner.os }}-jaspr-cli
+          restore-keys: |
+            ${{ runner.os }}-jaspr-cli-
 
       - name: Install Jaspr CLI
         run: dart pub global activate jaspr_cli
