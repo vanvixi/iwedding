@@ -50,3 +50,4 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_IWEDDING_VUONGS2TRANG }}
           channelId: live
           projectId: iwedding-vuongs2trang
+          entryPoint: .

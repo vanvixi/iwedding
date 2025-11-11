@@ -51,3 +51,4 @@ jobs:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_IWEDDING_VUONGS2TRANG }}
           projectId: iwedding-vuongs2trang
+          entryPoint: .
