@@ -21,7 +21,6 @@ class MobileFrame extends StatelessComponent {
         margin: Margin.all(Unit.auto),
         border: Border(width: Unit.pixels(1), color: Color('#e0e0e0')),
         radius: BorderRadius.circular(Unit.pixels(4)),
-        overflow: Overflow.hidden,
         shadow: BoxShadow(
           offsetX: Unit.pixels(0),
           offsetY: Unit.pixels(0),
