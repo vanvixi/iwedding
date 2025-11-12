@@ -16,7 +16,6 @@ class MobileFrame extends StatelessComponent {
       styles: Styles(
         position: Position.relative(),
         width: Unit.pixels(385),
-        height: Unit.vh(90),
         margin: Margin.all(Unit.auto),
         border: Border(width: Unit.pixels(1), color: Color('#e0e0e0')),
         radius: BorderRadius.circular(Unit.pixels(4)),
@@ -26,7 +25,7 @@ class MobileFrame extends StatelessComponent {
           blur: Unit.pixels(10),
           color: Color.rgba(0, 0, 0, 0.1),
         ),
-        raw: {'flex-shrink': '0'},
+        raw: {'flex-shrink': '0', 'height': '90dvh'},
       ),
       children,
     );

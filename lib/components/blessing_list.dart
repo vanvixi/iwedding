@@ -93,7 +93,7 @@ class _BlessingListState extends State<BlessingList> {
           left: Unit.pixels(12),
           bottom: Unit.expression('calc(5vh + 12px)'),
         ),
-        zIndex: ZIndex(1001),
+        zIndex: ZIndex(11),
         width: Unit.percent(70),
         height: Unit.pixels(150),
         overflow: Overflow.auto,

@@ -165,10 +165,12 @@ class _BlessingFormState extends State<BlessingForm> {
     Future.delayed(Duration(milliseconds: 300), () {
       try {
         // Try using scrollIntoView with options
-        final options = {
-          'behavior': 'smooth',
-          'block': 'center',
-        }.jsify() as JSAny;
+        final options =
+            {
+                  'behavior': 'smooth',
+                  'block': 'center',
+                }.jsify()
+                as JSAny;
         element.scrollIntoView(options);
       } catch (e) {
         // Fallback to simple scrollIntoView
@@ -259,7 +261,7 @@ class _BlessingFormState extends State<BlessingForm> {
             classes: 'bar-m-com bar-m-name',
             attributes: {
               'maxlength': '25',
-              'placeholder': 'Tên của bạn',
+              'placeholder': 'Cho chúng mình biết tên bạn nhé 😊',
             },
           ),
         ],
@@ -271,7 +273,7 @@ class _BlessingFormState extends State<BlessingForm> {
         [
           textarea(
             classes: 'bar-m-com bar-m-mess',
-            placeholder: 'Lời chúc của bạn',
+            placeholder: 'Chúng mình rất hân hạnh nhận được lời chúc từ bạn 💕',
             [],
           ),
         ],

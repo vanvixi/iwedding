@@ -61,7 +61,7 @@
 	position: absolute;
 	right: 12px;
 	top: 12px;
-	z-index: 1000;
+	z-index: 11;
 	width: 30px;
 	height: 30px;
 	display: flex;
@@ -196,7 +196,7 @@
 	background-color: #fff;
 	border-radius: 0.5rem 0.5rem 0 0;
 	box-sizing: border-box;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
@@ -209,7 +209,7 @@
 	top: 0;
 	right: 0;
 	bottom: 0;
-	z-index: 9999997;
+	z-index: 9999998;
 	background: rgba(0, 0, 0, 0.4);
 }
 
@@ -332,7 +332,7 @@
 	-ms-flex-pack: center;
 	justify-content: center;
 	cursor: pointer;
-	z-index: 9999998;
+	z-index: 12;
 	-webkit-transition: all 0.3s ease;
 	transition: all 0.3s ease;
 }
@@ -449,13 +449,13 @@
   .wedding-page {
     padding: 0 !important;
     background-color: #fff !important;
-    height: 100vh !important;
+    height: 100dvh !important;
   }
 
   /* Make frame full screen - remove borders, shadows, margins */
   .mobile-frame {
     width: 100vw !important;
-    height: 100vh !important;
+    height: 100dvh !important;
     margin: 0 !important;
     border: none !important;
     border-radius: 0 !important;
@@ -464,12 +464,12 @@
 
   /* Make page container full height */
   #wedding-page-container {
-    height: 100vh !important;
+    height: 100dvh !important;
   }
 
   /* Make scrollable container full height */
   #wedding-page-container > div:first-child {
-    height: 100vh !important;
+    height: 100dvh !important;
   }
 
   /* Make root container full viewport width */
