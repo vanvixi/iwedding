@@ -185,11 +185,7 @@ class _GiftPopupState extends State<GiftPopup> {
               display: Display.flex,
               width: Unit.percent(100),
               padding: Padding.all(Unit.pixels(4)),
-              margin: Margin.only(
-                left: Unit.pixels(16),
-                right: Unit.pixels(16),
-                bottom: Unit.pixels(32),
-              ),
+              margin: Margin.symmetric(horizontal: Unit.pixels(16)),
               border: Border(width: Unit.pixels(1), color: Color('#e5e5e5')),
               radius: BorderRadius.circular(Unit.pixels(8)),
             ),

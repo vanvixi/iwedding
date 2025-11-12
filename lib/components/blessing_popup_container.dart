@@ -261,7 +261,7 @@ class _BlessingFormState extends State<BlessingForm> {
             classes: 'bar-m-com bar-m-name',
             attributes: {
               'maxlength': '25',
-              'placeholder': 'Tên của bạn',
+              'placeholder': 'Cho chúng mình biết tên bạn nhé 😊',
             },
           ),
         ],
@@ -273,7 +273,7 @@ class _BlessingFormState extends State<BlessingForm> {
         [
           textarea(
             classes: 'bar-m-com bar-m-mess',
-            placeholder: 'Lời chúc của bạn',
+            placeholder: 'Chúng mình rất hân hạnh nhận được lời chúc từ bạn 💕',
             [],
           ),
         ],
@@ -291,7 +291,7 @@ class _BlessingFormState extends State<BlessingForm> {
         classes: 'wedding-btn rounded',
         styles: Styles(
           width: Unit.percent(90),
-          margin: Margin.only(top: Unit.pixels(24), bottom: Unit.pixels(32)),
+          margin: Margin.only(top: Unit.pixels(24)),
         ),
         onClick: () => _handleSubmit(),
         disabled: _isSubmitting || _isSubmittedSuccessfully,
