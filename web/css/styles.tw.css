@@ -196,7 +196,7 @@
 	background-color: #fff;
 	border-radius: 0.5rem 0.5rem 0 0;
 	box-sizing: border-box;
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	left: 50%;
 	transform: translateX(-50%);
@@ -449,13 +449,13 @@
   .wedding-page {
     padding: 0 !important;
     background-color: #fff !important;
-    height: 100vh !important;
+    height: 100dvh !important;
   }
 
   /* Make frame full screen - remove borders, shadows, margins */
   .mobile-frame {
     width: 100vw !important;
-    height: 100vh !important;
+    height: 100dvh !important;
     margin: 0 !important;
     border: none !important;
     border-radius: 0 !important;
@@ -464,12 +464,12 @@
 
   /* Make page container full height */
   #wedding-page-container {
-    height: 100vh !important;
+    height: 100dvh !important;
   }
 
   /* Make scrollable container full height */
   #wedding-page-container > div:first-child {
-    height: 100vh !important;
+    height: 100dvh !important;
   }
 
   /* Make root container full viewport width */
