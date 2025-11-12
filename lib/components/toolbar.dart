@@ -15,7 +15,7 @@ class Toolbar extends StatelessComponent {
           left: Unit.percent(50),
           bottom: Unit.vh(5),
         ),
-        zIndex: ZIndex(9999998), // Above popup backdrop (9999997) but below popup content (9999999)
+        zIndex: ZIndex(10),
         width: Unit.percent(100),
         height: Unit.pixels(64),
         maxWidth: Unit.pixels(385),

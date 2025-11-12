@@ -112,21 +112,19 @@ class CalendarSection extends StatelessComponent {
                                     top: Unit.pixels(0),
                                     left: Unit.pixels(0),
                                   ),
+                                  zIndex: ZIndex(0),
                                   width: Unit.percent(100),
                                   height: Unit.percent(100),
                                   raw: {
                                     'object-fit': 'contain',
                                     'object-position': 'center',
-                                    'z-index': '0',
                                   },
                                 ),
                               ),
                             div(
                               styles: Styles(
                                 position: Position.relative(),
-                                raw: {
-                                  'z-index': '1',
-                                },
+                                zIndex: ZIndex(1),
                               ),
                               [text('$day')],
                             ),
