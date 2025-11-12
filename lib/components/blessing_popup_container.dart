@@ -165,10 +165,12 @@ class _BlessingFormState extends State<BlessingForm> {
     Future.delayed(Duration(milliseconds: 300), () {
       try {
         // Try using scrollIntoView with options
-        final options = {
-          'behavior': 'smooth',
-          'block': 'center',
-        }.jsify() as JSAny;
+        final options =
+            {
+                  'behavior': 'smooth',
+                  'block': 'center',
+                }.jsify()
+                as JSAny;
         element.scrollIntoView(options);
       } catch (e) {
         // Fallback to simple scrollIntoView
@@ -289,7 +291,7 @@ class _BlessingFormState extends State<BlessingForm> {
         classes: 'wedding-btn rounded',
         styles: Styles(
           width: Unit.percent(90),
-          margin: Margin.only(top: Unit.pixels(24)),
+          margin: Margin.only(top: Unit.pixels(24), bottom: Unit.pixels(32)),
         ),
         onClick: () => _handleSubmit(),
         disabled: _isSubmitting || _isSubmittedSuccessfully,
