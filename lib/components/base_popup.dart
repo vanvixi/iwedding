@@ -3,6 +3,7 @@ import 'dart:js_interop';
 import 'package:jaspr/jaspr.dart';
 import 'package:web/web.dart' as web;
 
+import '../helper/popup_height_helper.dart';
 import 'svgs/icons/ic_close.dart';
 
 /// Base popup component with slide-up/down animations
@@ -26,12 +27,14 @@ class _BasePopupState extends State<BasePopup> {
   bool _hasAnimated = false;
   bool _isClosing = false;
   web.EventListener? _eventListener;
+  final PopupHeightHelper _heightHelper = PopupHeightHelper();
 
   @override
   void initState() {
     super.initState();
     if (component.isVisible) {
       _triggerAnimation();
+      _heightHelper.initialize();
     }
     _addEventCloseWithAnimationListener();
   }
@@ -41,6 +44,7 @@ class _BasePopupState extends State<BasePopup> {
     if (_eventListener != null && component.key != null) {
       web.document.removeEventListener(component.key.toString(), _eventListener);
     }
+    _heightHelper.dispose();
     super.dispose();
   }
 
@@ -54,6 +58,7 @@ class _BasePopupState extends State<BasePopup> {
         _isClosing = false;
       });
       _triggerAnimation();
+      _heightHelper.refresh();
     } else if (!component.isVisible && oldComponent.isVisible && !_isClosing) {
       // If closed from outside without animation, reset immediately
       setState(() {
