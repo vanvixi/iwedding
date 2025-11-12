@@ -24,16 +24,17 @@ class WeddingPage extends StatelessComponent {
     return div(
       classes: 'wedding-page',
       styles: Styles(
-        width: Unit.vw(100),
-        minHeight: Unit.vh(100),
-        padding: Padding.only(top: Unit.vh(5)),
         backgroundColor: Color('#f0f2f5'),
+        raw: {
+          'width': '100dvw',
+          'height': '100dvh',
+          'padding-top': '5dvh',
+        },
       ),
       [
         MobileFrame(
           children: [
             AudioControl(),
-            // ScrollObserver(),
             _PageContainer(),
           ],
         ),
