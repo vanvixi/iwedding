@@ -193,11 +193,13 @@
 	width: 385px;
 	max-width: 385px;
 	min-height: 20rem;
+	max-height: calc(85vh - env(safe-area-inset-bottom)); /* Subtract safe area from max height */
+	overflow-y: auto;
 	background-color: #fff;
 	border-radius: 0.5rem 0.5rem 0 0;
 	box-sizing: border-box;
 	position: absolute;
-	bottom: 0;
+	bottom: env(safe-area-inset-bottom, 0); /* Position above safe area */
 	left: 50%;
 	transform: translateX(-50%);
 	z-index: 9999999;
@@ -535,6 +537,8 @@
   .popup-wrapper {
     width: 100vw !important;
     max-width: 100vw !important;
+    max-height: calc(80vh - env(safe-area-inset-bottom)) !important; /* Reduce height on mobile to avoid browser UI */
+    bottom: env(safe-area-inset-bottom, 0) !important; /* Position above safe area */
     left: 0 !important;
     transform: none !important;
   }
